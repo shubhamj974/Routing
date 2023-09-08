@@ -1,0 +1,21 @@
+<p class="alert alert-success">
+  The Product name is <strong>{{ productObj.pName }}</strong> and product id is
+  <strong>{{ productObj.id }} </strong> and product status is
+  <strong>{{ productObj.pStatus }}</strong>
+</p>
+
+<button
+  [routerLink]="['/products', 3]"
+  type="button"
+  class="btn btn-primary mr-3"
+>
+  Go to iphone
+</button>
+
+<button
+  [routerLink]="['edit', productObj.pStatus]"
+  type="button"
+  class="btn btn-primary"
+>
+  Edit Product
+</button>

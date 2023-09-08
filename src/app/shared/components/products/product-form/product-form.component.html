@@ -1,0 +1,31 @@
+<div class="form-group">
+  <label for="pName">Product Name</label>
+  <input
+    #Pname
+    [value]="productObj.pName"
+    type="text"
+    name=""
+    id="pName"
+    class="form-control"
+    placeholder="Product Name"
+    aria-describedby="helpId"
+  />
+</div>
+
+<div class="form-group">
+  <select #Pstatus class="form-control" [value]="productObj.pStatus">
+    <option value="In-Progress">In Progress</option>
+    <option value="Dispatched">Dispatched</option>
+    <option value="Delivered">Delivered</option>
+  </select>
+</div>
+
+<div class="text-right">
+  <button
+    type="button"
+    (click)="onUpdateProduct(Pname, Pstatus)"
+    class="btn btn-primary"
+  >
+    Update product
+  </button>
+</div>

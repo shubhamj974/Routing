@@ -1,0 +1,13 @@
+<ul class="list-group">
+  <li
+    [routerLink]="['/users', item.id]"
+    *ngFor="let item of usersInfo"
+    class="list-group-item"
+  >
+    {{ item.userName }}
+  </li>
+</ul>
+<hr />
+<button type="button" (click)="OnLoadProducts()" class="btn btn-primary">
+  Go to products
+</button>

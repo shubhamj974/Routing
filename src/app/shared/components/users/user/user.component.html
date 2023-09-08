@@ -1,0 +1,12 @@
+<p class="alert alert-primary">
+  The name is <strong>{{ userObj.userName }}</strong> and userId is
+  <strong>{{ userObj.id }}</strong>
+</p>
+
+<button [routerLink]="['/users', 1]" type="button" class="btn btn-primary mr-3">
+  Go to jhon
+</button>
+
+<button [routerLink]="['edit']" type="button" class="btn btn-primary">
+  Edit User
+</button>
