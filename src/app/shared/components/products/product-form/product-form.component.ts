@@ -11,6 +11,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductFormComponent implements OnInit {
   public productId!: number;
   public productObj!: Iproduct;
+  public canEdit: number = 0;
   constructor(
     private _route: ActivatedRoute,
     private _productService: ProductService
@@ -19,6 +20,8 @@ export class ProductFormComponent implements OnInit {
   ngOnInit(): void {
     this.productId = +this._route.snapshot.params['productID'];
     this.productObj = this._productService.getSingleProduct(this.productId);
+
+    this.canEdit = +this._route.snapshot.queryParams['canEdit'];
   }
 
   onUpdateProduct(Pname: HTMLInputElement, Pstatus: HTMLSelectElement) {
@@ -26,8 +29,8 @@ export class ProductFormComponent implements OnInit {
       pName: Pname.value,
       pStatus: Pstatus.value as productStatus,
       id: this.productId,
+      canReturn: this.productObj.canReturn,
     };
-
     this._productService.updateProduct(productData);
   }
 }

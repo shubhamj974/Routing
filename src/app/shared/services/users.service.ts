@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Iuser } from '../models/users';
+import { Iuser, userType } from '../models/users';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -10,22 +10,27 @@ export class UsersService {
     {
       userName: 'jhon',
       id: 1,
+      userType: userType.Admin,
     },
     {
       userName: 'july',
       id: 2,
+      userType: userType.User,
     },
     {
       userName: 'james',
       id: 3,
+      userType: userType.User,
     },
     {
       userName: 'Tonny',
       id: 4,
+      userType: userType.Admin,
     },
     {
       userName: 'Magnus',
       id: 5,
+      userType: userType.User,
     },
   ];
   constructor(private _router: Router) {}

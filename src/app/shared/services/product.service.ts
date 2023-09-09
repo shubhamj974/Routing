@@ -11,26 +11,32 @@ export class ProductService {
       pName: 'Samsung S21',
       id: 1,
       pStatus: productStatus.Delivered,
+
+      canReturn: 1,
     },
     {
       pName: 'Samsung M21',
       id: 2,
       pStatus: productStatus.Dispatched,
+      canReturn: 1,
     },
     {
       pName: 'Iphone 15',
       id: 3,
       pStatus: productStatus.InProgress,
+      canReturn: 0,
     },
     {
       pName: 'OnePlus 5G',
       id: 4,
       pStatus: productStatus.Dispatched,
+      canReturn: 0,
     },
     {
       pName: 'Redmi note 7 pro',
       id: 5,
       pStatus: productStatus.InProgress,
+      canReturn: 1,
     },
   ];
   constructor(private _router: Router) {}

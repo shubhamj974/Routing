@@ -2,6 +2,7 @@ export interface Iproduct {
   pName: string;
   id: number;
   pStatus: productStatus;
+  canReturn: number;
 }
 
 export enum productStatus {

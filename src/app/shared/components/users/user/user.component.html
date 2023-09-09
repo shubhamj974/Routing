@@ -7,6 +7,11 @@
   Go to jhon
 </button>
 
-<button [routerLink]="['edit']" type="button" class="btn btn-primary">
+<button
+  [queryParamsHandling]="'preserve'"
+  [routerLink]="['edit']"
+  type="button"
+  class="btn btn-primary"
+>
   Edit User
 </button>

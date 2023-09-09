@@ -1,5 +1,6 @@
 <ul class="list-group">
   <li
+    [queryParams]="{ canEdit: item.userType }"
     [routerLink]="['/users', item.id]"
     *ngFor="let item of usersInfo"
     class="list-group-item"
