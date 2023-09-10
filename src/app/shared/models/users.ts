@@ -1,6 +1,6 @@
 export interface Iuser {
   userName: string;
-  id: number;
+  id: string;
   userType: userType;
 }
 

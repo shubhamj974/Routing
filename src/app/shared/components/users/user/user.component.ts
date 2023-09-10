@@ -9,7 +9,7 @@ import { ActivatedRoute, Params } from '@angular/router';
   styleUrls: ['./user.component.scss'],
 })
 export class UserComponent implements OnInit {
-  public userId!: number;
+  public userId!: string;
   public userObj!: Iuser;
   constructor(
     private _route: ActivatedRoute,
@@ -17,11 +17,11 @@ export class UserComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.userId = +this._route.snapshot.params['userID'];
+    this.userId = this._route.snapshot.params['userID'];
     this.userObj = this._usersServices.getSingleUser(this.userId);
 
     this._route.params.subscribe((param: Params) => {
-      this.userId = +param['userID'];
+      this.userId = param['userID'];
       this.userObj = this._usersServices.getSingleUser(this.userId);
     });
   }

@@ -1,3 +1,4 @@
+import { UtilityService } from './../../../services/utility.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Iuser, userType } from 'src/app/shared/models/users';
@@ -9,19 +10,23 @@ import { UsersService } from 'src/app/shared/services/users.service';
   styleUrls: ['./user-form.component.scss'],
 })
 export class UserFormComponent implements OnInit {
-  public userId!: number;
+  public userId!: string;
   public userObj!: Iuser;
-  public canEdit: userType = userType.Admin;
+  public canEdit: boolean = true;
+  public type = userType;
   constructor(
     private _route: ActivatedRoute,
-    private _userService: UsersService
+    private _userService: UsersService,
+    private _utilityService: UtilityService
   ) {}
 
   ngOnInit(): void {
-    this.userId = +this._route.snapshot.params['userID'];
+    this.userId = this._route.snapshot.params['userID'];
     this.userObj = this._userService.getSingleUser(this.userId);
 
-    this.canEdit = this._route.snapshot.queryParams['canEdit'];
+    if (this._route.snapshot.queryParams['canEdit'] === 'Admin') {
+      this.canEdit = false;
+    }
   }
 
   onUserEdit(UserName: HTMLInputElement) {
@@ -31,5 +36,14 @@ export class UserFormComponent implements OnInit {
       userType: this.userObj.userType,
     };
     this._userService.updateSinglerUser(obj);
+  }
+
+  onAddNewUser(userName: string, userType: HTMLSelectElement) {
+    let obj: Iuser = {
+      userName: userName,
+      userType: userType.value as userType,
+      id: this._utilityService.uuid(),
+    };
+    this._userService.addNewUser(obj);
   }
 }

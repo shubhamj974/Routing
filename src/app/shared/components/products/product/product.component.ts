@@ -9,7 +9,7 @@ import { ProductService } from 'src/app/shared/services/product.service';
   styleUrls: ['./product.component.scss'],
 })
 export class ProductComponent implements OnInit {
-  public productId!: number;
+  public productId!: string;
   public productObj!: Iproduct;
   constructor(
     private _route: ActivatedRoute,
@@ -17,11 +17,11 @@ export class ProductComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.productId = +this._route.snapshot.params['productID'];
+    this.productId = this._route.snapshot.params['productID'];
     this.productObj = this._productServices.getSingleProduct(this.productId);
 
     this._route.params.subscribe((param: Params) => {
-      this.productId = +param['productID'];
+      this.productId = param['productID'];
       this.productObj = this._productServices.getSingleProduct(this.productId);
     });
   }

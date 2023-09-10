@@ -1,11 +1,11 @@
-<ng-container *ngIf="canEdit === 'User'; else show">
+<ng-container *ngIf="canEdit; else show">
   <div class="card">
     <div class="card-body">
       <div class="form-group">
         <label for="userName">User Name</label>
         <input
           #UserName
-          [value]="userObj.userName"
+          [value]="userObj ? userObj.userName : ''"
           type="text"
           class="form-control"
           name=""
@@ -14,14 +14,33 @@
           placeholder=""
         />
       </div>
+      <div class="form-group">
+        <label for="userType">User Type</label>
+        <select #userType name="" id="" class="form-control">
+          <option [value]="type.Admin">{{ type.Admin }}</option>
+          <option [value]="type.User">{{ type.User }}</option>
+        </select>
+      </div>
       <div class="text-right">
-        <button
-          (click)="onUserEdit(UserName)"
-          type="button"
-          class="btn btn-primary"
-        >
-          Update User
-        </button>
+        <ng-container *ngIf="userId; else addNewUser">
+          <button
+            (click)="onUserEdit(UserName)"
+            type="button"
+            class="btn btn-primary"
+          >
+            Update User
+          </button>
+        </ng-container>
+
+        <ng-template #addNewUser>
+          <button
+            (click)="onAddNewUser(UserName.value, userType)"
+            type="button"
+            class="btn btn-primary"
+          >
+            Add New User
+          </button>
+        </ng-template>
       </div>
     </div>
   </div>

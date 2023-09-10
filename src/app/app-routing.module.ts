@@ -24,6 +24,10 @@ const routes: Routes = [
     component: UsersComponent,
   },
   {
+    path: 'users/adduser',
+    component: UserFormComponent,
+  },
+  {
     path: 'users/:userID',
     component: UserComponent,
   },

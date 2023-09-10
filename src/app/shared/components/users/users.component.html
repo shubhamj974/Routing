@@ -9,6 +9,10 @@
   </li>
 </ul>
 <hr />
-<button type="button" (click)="OnLoadProducts()" class="btn btn-primary">
+<button type="button" (click)="OnLoadProducts()" class="btn btn-primary mr-3">
   Go to products
+</button>
+
+<button [routerLink]="['/users/adduser']" type="button" class="btn btn-primary">
+  Add User
 </button>

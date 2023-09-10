@@ -1,6 +1,6 @@
 export interface Iproduct {
   pName: string;
-  id: number;
+  id: string;
   pStatus: productStatus;
   canReturn: number;
 }

@@ -9,27 +9,27 @@ export class UsersService {
   public usersArr: Array<Iuser> = [
     {
       userName: 'jhon',
-      id: 1,
+      id: '1',
       userType: userType.Admin,
     },
     {
       userName: 'july',
-      id: 2,
+      id: '2',
       userType: userType.User,
     },
     {
       userName: 'james',
-      id: 3,
+      id: '3',
       userType: userType.User,
     },
     {
       userName: 'Tonny',
-      id: 4,
+      id: '4',
       userType: userType.Admin,
     },
     {
       userName: 'Magnus',
-      id: 5,
+      id: '5',
       userType: userType.User,
     },
   ];
@@ -39,7 +39,7 @@ export class UsersService {
     return this.usersArr;
   }
 
-  getSingleUser(id: number): Iuser {
+  getSingleUser(id: string): Iuser {
     return this.usersArr.find((ele) => ele.id === id)!;
   }
 
@@ -51,5 +51,10 @@ export class UsersService {
       this._router.navigate(['users']);
       return;
     });
+  }
+
+  addNewUser(newObj: Iuser): void {
+    this.usersArr.unshift(newObj);
+    this._router.navigate(['/users']);
   }
 }
