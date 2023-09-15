@@ -3,6 +3,7 @@ import { Iproduct, productStatus } from './../../../models/product';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
+import { MatSelect } from '@angular/material/select';
 
 @Component({
   selector: 'app-product-form',
@@ -31,7 +32,7 @@ export class ProductFormComponent implements OnInit {
     });
   }
 
-  onUpdateProduct(Pname: HTMLInputElement, Pstatus: HTMLSelectElement) {
+  onUpdateProduct(Pname: HTMLInputElement, Pstatus: MatSelect) {
     let productData: Iproduct = {
       pName: Pname.value,
       pStatus: Pstatus.value as productStatus,
@@ -41,7 +42,7 @@ export class ProductFormComponent implements OnInit {
     this._productService.updateProduct(productData);
   }
 
-  onAddProduct(pname: HTMLInputElement, pstatus: HTMLSelectElement) {
+  onAddProduct(pname: HTMLInputElement, pstatus: MatSelect) {
     let obj: Iproduct = {
       pName: pname.value as string,
       pStatus: pstatus.value as productStatus,

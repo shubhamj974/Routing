@@ -1,6 +1,9 @@
 import { Router } from '@angular/router';
 import { Injectable } from '@angular/core';
 import { Iproduct, productStatus } from '../models/product';
+import { SnackBarService } from './snack-bar.service';
+import { DialogBoxService } from './dialog-box.service';
+import { DialogBoxComponent } from '../components/dialog-box/dialog-box.component';
 
 @Injectable({
   providedIn: 'root',
@@ -39,7 +42,11 @@ export class ProductService {
       canReturn: 1,
     },
   ];
-  constructor(private _router: Router) {}
+  constructor(
+    private _router: Router,
+    private _snackBarService: SnackBarService,
+    private _dialogBoxService: DialogBoxService
+  ) {}
 
   AllProducts(): Array<Iproduct> {
     return this.productsArr;
@@ -52,6 +59,9 @@ export class ProductService {
   updateProduct(productObj: Iproduct) {
     this.productsArr.forEach((ele) => {
       if (ele.id === productObj.id) {
+        this._snackBarService.openSnackBar(
+          `The product ${ele.pName} change to ${productObj.pName}`
+        );
         ele.pName = productObj.pName;
         ele.pStatus = productObj.pStatus;
       }
@@ -63,11 +73,30 @@ export class ProductService {
   addProduct(newObj: Iproduct) {
     this.productsArr.unshift(newObj);
     this._router.navigate(['products']);
+    this._snackBarService.openSnackBar(
+      `The product ${newObj.pName} is Added!!!`
+    );
   }
 
-  deleteProduct(id: string) {
-    let findIndex = this.productsArr.findIndex((index) => index.id === id);
-    this.productsArr.splice(findIndex, 1);
-    this._router.navigate(['products']);
+  deleteProduct(start: string, exist: string, id: string) {
+    const dialogRef = this._dialogBoxService.openDialog(
+      start,
+      exist,
+      DialogBoxComponent
+    );
+    dialogRef.afterClosed().subscribe((res: boolean) => {
+      if (res) {
+        this.productsArr.forEach((ele) => {
+          if (ele.id === id) {
+            this._snackBarService.openSnackBar(
+              `The product ${ele.pName} is removed!!!`
+            );
+          }
+        });
+        let findIndex = this.productsArr.findIndex((index) => index.id === id);
+        this.productsArr.splice(findIndex, 1);
+        this._router.navigate(['products']);
+      }
+    });
   }
 }

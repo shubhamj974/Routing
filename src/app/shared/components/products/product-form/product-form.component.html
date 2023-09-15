@@ -1,9 +1,10 @@
 <ng-container *ngIf="canEdit; else canReturn">
-  <div class="card">
-    <div class="card-body">
-      <div class="form-group">
-        <label for="pName">Product Name</label>
+  <mat-card>
+    <form class="example-form">
+      <mat-form-field class="example-full-width" appearance="fill">
+        <mat-label>Product Name</mat-label>
         <input
+          matInput
           #Pname
           [value]="productObj ? productObj.pName : ''"
           type="text"
@@ -12,43 +13,41 @@
           class="form-control"
           placeholder="Product Name"
           aria-describedby="helpId"
+          placeholder="Ex. Iphone"
         />
-      </div>
-      <div class="form-group">
-        <label for="productStatus">Product Status</label>
-        <select
-          #Pstatus
-          class="form-control"
-          [value]="productObj ? productObj.pStatus : ''"
-        >
-          <option value="In-Progress">In Progress</option>
-          <option value="Dispatched">Dispatched</option>
-          <option value="Delivered">Delivered</option>
-        </select>
-      </div>
-
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label>Select me</mat-label>
+        <mat-select #Pstatus [value]="productObj ? productObj.pStatus : ''">
+          <mat-option value="In-Progress">In Progress</mat-option>
+          <mat-option value="Dispatched">Dispatched</mat-option>
+          <mat-option value="Delivered">Delivered</mat-option>
+        </mat-select>
+      </mat-form-field>
       <div class="text-right">
         <ng-container *ngIf="productId; else showBtn">
           <button
+            mat-raised-button
+            color="primary"
             type="button"
             (click)="onUpdateProduct(Pname, Pstatus)"
-            class="btn btn-primary"
           >
-            Update product
+            Update Product
           </button>
         </ng-container>
         <ng-template #showBtn>
           <button
+            color="primary"
+            mat-raised-button
             (click)="onAddProduct(Pname, Pstatus)"
             type="button"
-            class="btn btn-primary"
           >
             Add Product
           </button>
         </ng-template>
       </div>
-    </div>
-  </div>
+    </form>
+  </mat-card>
 </ng-container>
 <ng-template #canReturn>
   <p class="alert alert-danger">

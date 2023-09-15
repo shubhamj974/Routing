@@ -16,6 +16,7 @@ import { ProductComponent } from './shared/components/products/product/product.c
 import { ProductFormComponent } from './shared/components/products/product-form/product-form.component';
 import { DialogBoxComponent } from './shared/components/dialog-box/dialog-box.component';
 import { DialogLogoutComponent } from './shared/components/dialog-logout/dialog-logout.component';
+import { NavBarToggleDirective } from './shared/directive/nav-bar-toggle.directive';
 
 @NgModule({
   declarations: [
@@ -30,6 +31,7 @@ import { DialogLogoutComponent } from './shared/components/dialog-logout/dialog-
     UserFormComponent,
     DialogBoxComponent,
     DialogLogoutComponent,
+    NavBarToggleDirective,
   ],
   imports: [
     BrowserModule,

@@ -26,7 +26,7 @@ export class ProductComponent implements OnInit {
     });
   }
 
-  onDeleteProd() {
-    this._productServices.deleteProduct(this.productId);
+  onDeleteProd(start: string, exist: string) {
+    this._productServices.deleteProduct(start, exist, this.productId);
   }
 }

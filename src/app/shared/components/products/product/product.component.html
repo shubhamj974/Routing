@@ -3,24 +3,32 @@
   <strong>{{ productObj.id }} </strong> and product status is
   <strong>{{ productObj.pStatus }}</strong>
 </p>
-
 <button
   [routerLink]="['/products', 3]"
   type="button"
-  class="btn btn-primary mr-3"
+  class="mr-3"
+  mat-raised-button
+  color="primary"
 >
   Go to iphone
 </button>
 
 <button
+  mat-raised-button
+  color="primary"
   [queryParamsHandling]="'preserve'"
   [routerLink]="['edit', productObj.pStatus]"
   type="button"
-  class="btn btn-primary mr-3"
+  class="mr-3"
 >
   Edit Product
 </button>
 
-<button (click)="onDeleteProd()" type="button" class="btn btn-danger">
+<button
+  mat-raised-button
+  color="warn"
+  (click)="onDeleteProd('0ms', '0ms')"
+  type="button"
+>
   Delete Product
 </button>
