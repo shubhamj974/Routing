@@ -1,6 +1,7 @@
+import { UtilityService } from './../../../services/utility.service';
 import { Iproduct, productStatus } from './../../../models/product';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
 
 @Component({
@@ -11,17 +12,23 @@ import { ProductService } from 'src/app/shared/services/product.service';
 export class ProductFormComponent implements OnInit {
   public productId!: string;
   public productObj!: Iproduct;
-  public canEdit: number = 0;
+  public canEdit: number = 1;
   constructor(
     private _route: ActivatedRoute,
-    private _productService: ProductService
+    private _productService: ProductService,
+    private _utilityService: UtilityService
   ) {}
 
   ngOnInit(): void {
     this.productId = this._route.snapshot.params['productID'];
     this.productObj = this._productService.getSingleProduct(this.productId);
 
-    this.canEdit = this._route.snapshot.queryParams['canEdit'];
+    this._route.queryParams.subscribe((queryParam: Params) => {
+      if (queryParam.hasOwnProperty('canEdit')) {
+        this.canEdit = +queryParam['canEdit'];
+        return;
+      }
+    });
   }
 
   onUpdateProduct(Pname: HTMLInputElement, Pstatus: HTMLSelectElement) {
@@ -32,5 +39,15 @@ export class ProductFormComponent implements OnInit {
       canReturn: this.productObj.canReturn,
     };
     this._productService.updateProduct(productData);
+  }
+
+  onAddProduct(pname: HTMLInputElement, pstatus: HTMLSelectElement) {
+    let obj: Iproduct = {
+      pName: pname.value as string,
+      pStatus: pstatus.value as productStatus,
+      id: this._utilityService.uuid(),
+      canReturn: Math.random() >= 5 ? 1 : 0,
+    };
+    this._productService.addProduct(obj);
   }
 }

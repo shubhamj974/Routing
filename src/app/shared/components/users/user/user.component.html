@@ -2,8 +2,13 @@
   The name is <strong>{{ userObj.userName }}</strong> and userId is
   <strong>{{ userObj.id }}</strong>
 </p>
-
-<button [routerLink]="['/users', 1]" type="button" class="btn btn-primary mr-3">
+<button
+  [routerLink]="['/users', 1]"
+  type="button"
+  class="mr-3"
+  mat-raised-button
+  color="primary"
+>
   Go to jhon
 </button>
 
@@ -11,7 +16,42 @@
   [queryParamsHandling]="'preserve'"
   [routerLink]="['edit']"
   type="button"
-  class="btn btn-primary"
+  class="mr-3"
+  mat-raised-button
+  color="primary"
+>
+  <mat-icon
+    aria-hidden="false"
+    aria-label="Example home icon"
+    fontIcon="edit"
+  ></mat-icon>
+</button>
+
+<button
+  (click)="onDeleteUser('0ms', '0ms')"
+  type="button"
+  mat-raised-button
+  color="warn"
+>
+  <mat-icon
+    aria-hidden="false"
+    aria-label="Example home icon"
+    fontIcon="delete"
+  ></mat-icon>
+</button>
+
+<!-- <button [routerLink]="['/users', 1]" type="button" class="btn btn-primary mr-3">
+  Go to jhon
+</button> -->
+<!-- <button
+  [queryParamsHandling]="'preserve'"
+  [routerLink]="['edit']"
+  type="button"
+  class="btn btn-primary mr-3"
 >
   Edit User
-</button>
+</button> -->
+
+<!-- <button (click)="onDeleteUser()" type="button" class="btn btn-danger">
+  Delete User
+</button> -->

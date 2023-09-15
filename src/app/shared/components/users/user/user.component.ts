@@ -2,6 +2,9 @@ import { Iuser } from './../../../models/users';
 import { UsersService } from './../../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
+import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
+import { DialogBoxService } from 'src/app/shared/services/dialog-box.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-user',
@@ -24,5 +27,9 @@ export class UserComponent implements OnInit {
       this.userId = param['userID'];
       this.userObj = this._usersServices.getSingleUser(this.userId);
     });
+  }
+
+  onDeleteUser(start: string, exist: string) {
+    this._usersServices.deleteUser(start, exist, this.userId);
   }
 }

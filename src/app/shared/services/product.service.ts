@@ -59,4 +59,15 @@ export class ProductService {
       return;
     });
   }
+
+  addProduct(newObj: Iproduct) {
+    this.productsArr.unshift(newObj);
+    this._router.navigate(['products']);
+  }
+
+  deleteProduct(id: string) {
+    let findIndex = this.productsArr.findIndex((index) => index.id === id);
+    this.productsArr.splice(findIndex, 1);
+    this._router.navigate(['products']);
+  }
 }

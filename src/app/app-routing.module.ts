@@ -9,6 +9,7 @@ import { UserComponent } from './shared/components/users/user/user.component';
 import { ProductComponent } from './shared/components/products/product/product.component';
 import { ProductFormComponent } from './shared/components/products/product-form/product-form.component';
 import { UserFormComponent } from './shared/components/users/user-form/user-form.component';
+import { AuthGaurd } from './shared/services/auth-gaurd.service';
 
 const routes: Routes = [
   {
@@ -22,32 +23,43 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
-  },
-  {
-    path: 'users/adduser',
-    component: UserFormComponent,
-  },
-  {
-    path: 'users/:userID',
-    component: UserComponent,
-  },
-  {
-    path: 'users/:userID/edit',
-    component: UserFormComponent,
+    canActivate: [AuthGaurd],
+    children: [
+      {
+        path: 'adduser',
+        component: UserFormComponent,
+      },
+      {
+        path: ':userID',
+        component: UserComponent,
+      },
+      {
+        path: ':userID/edit',
+        component: UserFormComponent,
+      },
+    ],
   },
 
   {
-    path: 'products', //todo http://localhost:4200/products
+    path: 'products',
     component: ProductsComponent,
+    canActivate: [AuthGaurd],
+    children: [
+      {
+        path: 'addProduct',
+        component: ProductFormComponent,
+      },
+      {
+        path: ':productID',
+        component: ProductComponent,
+      },
+      {
+        path: ':productID/edit/:pStatus',
+        component: ProductFormComponent,
+      },
+    ],
   },
-  {
-    path: 'products/:productID', //todo http://localhost:4200/products/3
-    component: ProductComponent,
-  },
-  {
-    path: 'products/:productID/edit/:pStatus', //todo http://localhost:4200/products/3/edit/Iphone%2015
-    component: ProductFormComponent,
-  },
+
   {
     path: 'page-not-found',
     component: PageNotFoundComponent,

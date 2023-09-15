@@ -1,10 +1,23 @@
-<ul class="list-group">
-  <li
-    [queryParams]="{ canEdit: item.canReturn }"
-    [routerLink]="['/products', item.id]"
-    *ngFor="let item of productsInfo"
-    class="list-group-item"
-  >
-    {{ item.pName }}
-  </li>
-</ul>
+<div class="row">
+  <div class="col-md-4">
+    <ul class="list-group mb-3">
+      <li
+        [queryParams]="{ canEdit: item.canReturn }"
+        [routerLink]="['/products', item.id]"
+        *ngFor="let item of productsInfo"
+        (click)="selectedId = item.id"
+        class="list-group-item"
+        [class.active]="item.id === selectedId"
+      >
+        {{ item.pName }}
+      </li>
+    </ul>
+
+    <button [routerLink]="['addProduct']" mat-raised-button color="primary">
+      Add New Product
+    </button>
+  </div>
+  <div class="col-md-8">
+    <router-outlet></router-outlet>
+  </div>
+</div>

@@ -1,38 +1,58 @@
 <ng-container *ngIf="canEdit; else canReturn">
-  <div class="form-group">
-    <label for="pName">Product Name</label>
-    <input
-      #Pname
-      [value]="productObj.pName"
-      type="text"
-      name=""
-      id="pName"
-      class="form-control"
-      placeholder="Product Name"
-      aria-describedby="helpId"
-    />
-  </div>
+  <div class="card">
+    <div class="card-body">
+      <div class="form-group">
+        <label for="pName">Product Name</label>
+        <input
+          #Pname
+          [value]="productObj ? productObj.pName : ''"
+          type="text"
+          name=""
+          id="pName"
+          class="form-control"
+          placeholder="Product Name"
+          aria-describedby="helpId"
+        />
+      </div>
+      <div class="form-group">
+        <label for="productStatus">Product Status</label>
+        <select
+          #Pstatus
+          class="form-control"
+          [value]="productObj ? productObj.pStatus : ''"
+        >
+          <option value="In-Progress">In Progress</option>
+          <option value="Dispatched">Dispatched</option>
+          <option value="Delivered">Delivered</option>
+        </select>
+      </div>
 
-  <div class="form-group">
-    <select #Pstatus class="form-control" [value]="productObj.pStatus">
-      <option value="In-Progress">In Progress</option>
-      <option value="Dispatched">Dispatched</option>
-      <option value="Delivered">Delivered</option>
-    </select>
-  </div>
-
-  <div class="text-right">
-    <button
-      type="button"
-      (click)="onUpdateProduct(Pname, Pstatus)"
-      class="btn btn-primary"
-    >
-      Update product
-    </button>
+      <div class="text-right">
+        <ng-container *ngIf="productId; else showBtn">
+          <button
+            type="button"
+            (click)="onUpdateProduct(Pname, Pstatus)"
+            class="btn btn-primary"
+          >
+            Update product
+          </button>
+        </ng-container>
+        <ng-template #showBtn>
+          <button
+            (click)="onAddProduct(Pname, Pstatus)"
+            type="button"
+            class="btn btn-primary"
+          >
+            Add Product
+          </button>
+        </ng-template>
+      </div>
+    </div>
   </div>
 </ng-container>
 <ng-template #canReturn>
   <p class="alert alert-danger">
-    The product <strong>{{ productObj.pName }}</strong> cannot be return
+    The product <strong>{{ productObj ? productObj.pName : "" }}</strong> cannot
+    be return
   </p>
 </ng-template>

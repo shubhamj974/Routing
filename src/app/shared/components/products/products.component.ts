@@ -1,5 +1,6 @@
+import { Router } from '@angular/router';
 import { ProductService } from '../../services/product.service';
-import { Iproduct } from './../../models/product';
+import { Iproduct, productStatus } from './../../models/product';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -9,9 +10,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductsComponent implements OnInit {
   public productsInfo!: Array<Iproduct>;
-  constructor(private _productService: ProductService) {}
+  public selectedId!: string;
+  constructor(
+    private _productService: ProductService,
+    private _router: Router
+  ) {}
 
   ngOnInit(): void {
     this.productsInfo = this._productService.AllProducts();
+    let defautProd = this.productsInfo[0].id;
+    this.selectedId = defautProd;
+    this._router.navigate([`products/${this.selectedId}`]);
   }
 }

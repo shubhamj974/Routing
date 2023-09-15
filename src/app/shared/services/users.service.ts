@@ -1,6 +1,8 @@
 import { Injectable } from '@angular/core';
 import { Iuser, userType } from '../models/users';
 import { Router } from '@angular/router';
+import { SnackBarService } from './snack-bar.service';
+import { DialogBoxService } from './dialog-box.service';
 
 @Injectable({
   providedIn: 'root',
@@ -33,7 +35,11 @@ export class UsersService {
       userType: userType.User,
     },
   ];
-  constructor(private _router: Router) {}
+  constructor(
+    private _router: Router,
+    private _snackbar: SnackBarService,
+    private _dialogBoxService: DialogBoxService
+  ) {}
 
   allUsers(): Array<Iuser> {
     return this.usersArr;
@@ -46,7 +52,11 @@ export class UsersService {
   updateSinglerUser(userObj: Iuser) {
     this.usersArr.forEach((user) => {
       if (user.id === userObj.id) {
+        this._snackbar.openSnackBar(
+          `The user ${user.userName} is change to ${userObj.userName}!!`
+        );
         user.userName = userObj.userName;
+        user.userType = userObj.userType;
       }
       this._router.navigate(['users']);
       return;
@@ -56,5 +66,28 @@ export class UsersService {
   addNewUser(newObj: Iuser): void {
     this.usersArr.unshift(newObj);
     this._router.navigate(['/users']);
+    this._snackbar.openSnackBar(`The user ${newObj.userName} is Added!!`);
+  }
+
+  deleteUser(start: string, exist: string, id: string) {
+    const dialogRef = this._dialogBoxService.openDialog(start, exist);
+    dialogRef.afterClosed().subscribe((res) => {
+      if (res) {
+        this.usersArr.forEach((ele) => {
+          if (ele.id === id) {
+            this._snackbar.openSnackBar(
+              `The user ${ele.userName} is removed !!!`
+            );
+
+            return;
+          }
+        });
+        let findIndex = this.usersArr.findIndex((index) => index.id === id);
+        this.usersArr.splice(findIndex, 1);
+        this._router.navigate(['/users']);
+      } else {
+        return;
+      }
+    });
   }
 }

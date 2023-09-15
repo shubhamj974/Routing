@@ -1,4 +1,4 @@
-import { Iproduct } from './../../../models/product';
+import { Iproduct, productStatus } from './../../../models/product';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
 import { ProductService } from 'src/app/shared/services/product.service';
@@ -24,5 +24,9 @@ export class ProductComponent implements OnInit {
       this.productId = param['productID'];
       this.productObj = this._productServices.getSingleProduct(this.productId);
     });
+  }
+
+  onDeleteProd() {
+    this._productServices.deleteProduct(this.productId);
   }
 }

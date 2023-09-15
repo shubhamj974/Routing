@@ -16,7 +16,11 @@
   [queryParamsHandling]="'preserve'"
   [routerLink]="['edit', productObj.pStatus]"
   type="button"
-  class="btn btn-primary"
+  class="btn btn-primary mr-3"
 >
   Edit Product
+</button>
+
+<button (click)="onDeleteProd()" type="button" class="btn btn-danger">
+  Delete Product
 </button>
