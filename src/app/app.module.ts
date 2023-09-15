@@ -15,6 +15,7 @@ import { ProductsComponent } from './shared/components/products/products.compone
 import { ProductComponent } from './shared/components/products/product/product.component';
 import { ProductFormComponent } from './shared/components/products/product-form/product-form.component';
 import { DialogBoxComponent } from './shared/components/dialog-box/dialog-box.component';
+import { DialogLogoutComponent } from './shared/components/dialog-logout/dialog-logout.component';
 
 @NgModule({
   declarations: [
@@ -28,6 +29,7 @@ import { DialogBoxComponent } from './shared/components/dialog-box/dialog-box.co
     ProductFormComponent,
     UserFormComponent,
     DialogBoxComponent,
+    DialogLogoutComponent,
   ],
   imports: [
     BrowserModule,

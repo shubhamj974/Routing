@@ -3,6 +3,7 @@ import { Iuser, userType } from '../models/users';
 import { Router } from '@angular/router';
 import { SnackBarService } from './snack-bar.service';
 import { DialogBoxService } from './dialog-box.service';
+import { DialogBoxComponent } from '../components/dialog-box/dialog-box.component';
 
 @Injectable({
   providedIn: 'root',
@@ -70,7 +71,11 @@ export class UsersService {
   }
 
   deleteUser(start: string, exist: string, id: string) {
-    const dialogRef = this._dialogBoxService.openDialog(start, exist);
+    const dialogRef = this._dialogBoxService.openDialog(
+      start,
+      exist,
+      DialogBoxComponent
+    );
     dialogRef.afterClosed().subscribe((res) => {
       if (res) {
         this.usersArr.forEach((ele) => {

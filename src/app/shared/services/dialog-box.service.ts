@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
-import { DialogBoxComponent } from '../components/dialog-box/dialog-box.component';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 
 @Injectable({
   providedIn: 'root',
@@ -8,8 +7,12 @@ import { DialogBoxComponent } from '../components/dialog-box/dialog-box.componen
 export class DialogBoxService {
   constructor(public dialog: MatDialog) {}
 
-  openDialog(enterAnimationDuration: string, exitAnimationDuration: string) {
-    return this.dialog.open(DialogBoxComponent, {
+  openDialog(
+    enterAnimationDuration: string,
+    exitAnimationDuration: string,
+    comp: any
+  ): MatDialogRef<boolean> {
+    return this.dialog.open(comp, {
       width: '300px',
       enterAnimationDuration,
       exitAnimationDuration,
