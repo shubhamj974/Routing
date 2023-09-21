@@ -1,4 +1,4 @@
-<div class="row">
+<div class="row my-5">
   <div class="col-md-4 mb-4 mb-md-0">
     <mat-selection-list [multiple]="false" class="mb-4">
       <mat-list-option
@@ -38,29 +38,3 @@
     <router-outlet></router-outlet>
   </div>
 </div>
-
-<!-- <ul class="list-group">
-      <li
-        [queryParams]="{ canEdit: item.userType }"
-        [routerLink]="['/users', item.id]"
-        *ngFor="let item of usersInfo"
-        class="list-group-item"
-        (click)="selectedUser = item.id"
-        [class.active]="selectedUser === item.id"
-      >
-        {{ item.userName }}
-      </li>
-    </ul> -->
-
-<!-- <button type="button" (click)="OnLoadProducts()" class="btn btn-primary mr-3">
-  Go to products
-</button> -->
-
-<!-- 
-<button
-      [routerLink]="['/users/adduser']"
-      type="button"
-      class="btn btn-primary"
-    >
-      Add User
-    </button> -->

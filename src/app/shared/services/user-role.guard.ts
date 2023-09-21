@@ -1,4 +1,3 @@
-import { AuthService } from './auth.service';
 import { Injectable } from '@angular/core';
 import {
   ActivatedRouteSnapshot,
@@ -11,17 +10,17 @@ import { Observable } from 'rxjs';
 @Injectable({
   providedIn: 'root',
 })
-export class AuthGaurd implements CanActivate {
-  constructor(private _authServices: AuthService) {}
-
+export class UserRoleGuard implements CanActivate {
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot
   ):
-    | boolean
-    | UrlTree
     | Observable<boolean | UrlTree>
-    | Promise<boolean | UrlTree> {
-    return this._authServices.isAuthenticated();
+    | Promise<boolean | UrlTree>
+    | boolean
+    | UrlTree {
+    let staticData: Array<string> = route.data['userRole'];
+    let actualData: string = localStorage.getItem('userRole')!;
+    return staticData.includes(actualData);
   }
 }

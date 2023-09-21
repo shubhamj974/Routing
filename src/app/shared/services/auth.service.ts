@@ -28,10 +28,29 @@ export class AuthService {
     });
   }
 
-  logIn() {
+  token(userRole: string): void {
+    localStorage.setItem('Token', 'JWT Token');
+    localStorage.setItem('userRole', userRole);
+  }
+
+  logIn(userName: string, userPass: string) {
     this._snackBar.openSnackBar(`Login Successfully Completed`);
-    localStorage.setItem('Token', 'shubham');
-    this.loginStatus = true;
+    if (userName === 'jhon123@gmail.com' && userPass === 'jhon@123') {
+      this.token('candidate');
+      this.loginStatus = true;
+      this._router.navigate(['']);
+    } else if (userName === 'july123@gmail.com' && userPass === 'july@123') {
+      this.token('admin');
+      this.loginStatus = true;
+      this._router.navigate(['']);
+    } else if (userName === 'jane123@gmail.com' && userPass === 'jane@123') {
+      this.token('superAdmin');
+      this._router.navigate(['']);
+    } else {
+      localStorage.setItem('Token', 'JWT Token');
+      this.loginStatus = true;
+      this._router.navigate(['']);
+    }
   }
 
   logOut(start: string, exist: string): void {
@@ -43,8 +62,9 @@ export class AuthService {
     dialogRef.afterClosed().subscribe((res: boolean) => {
       if (res) {
         this._snackBar.openSnackBar(`Logout Successfully Completed`);
-        this._router.navigate(['/']);
+        this._router.navigate(['auth']);
         localStorage.removeItem('Token');
+        localStorage.removeItem('userRole');
         this.loginStatus = false;
         return;
       } else {

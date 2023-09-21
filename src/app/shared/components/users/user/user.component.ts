@@ -2,9 +2,7 @@ import { Iuser } from './../../../models/users';
 import { UsersService } from './../../../services/users.service';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Params } from '@angular/router';
-import { DialogBoxComponent } from '../../dialog-box/dialog-box.component';
-import { DialogBoxService } from 'src/app/shared/services/dialog-box.service';
-import { MatDialogRef } from '@angular/material/dialog';
+
 
 @Component({
   selector: 'app-user',

@@ -1,3 +1,4 @@
+import { UserRoleGuard } from './shared/services/user-role.guard';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -9,7 +10,9 @@ import { UserComponent } from './shared/components/users/user/user.component';
 import { ProductComponent } from './shared/components/products/product/product.component';
 import { ProductFormComponent } from './shared/components/products/product-form/product-form.component';
 import { UserFormComponent } from './shared/components/users/user-form/user-form.component';
-import { AuthGaurd } from './shared/services/auth-gaurd.service';
+import { AuthGaurd } from './shared/services/auth.guard';
+import { AuthComponent } from './shared/components/auth/auth.component';
+import { AdminComponent } from './shared/components/admin/admin.component';
 
 const routes: Routes = [
   {
@@ -24,6 +27,7 @@ const routes: Routes = [
     path: 'users',
     component: UsersComponent,
     canActivate: [AuthGaurd],
+    canActivateChild: [AuthGaurd],
     children: [
       {
         path: 'adduser',
@@ -44,6 +48,7 @@ const routes: Routes = [
     path: 'products',
     component: ProductsComponent,
     canActivate: [AuthGaurd],
+    canActivateChild: [AuthGaurd],
     children: [
       {
         path: 'addProduct',
@@ -58,6 +63,18 @@ const routes: Routes = [
         component: ProductFormComponent,
       },
     ],
+  },
+  {
+    path: 'admin',
+    component: AdminComponent,
+    canActivate: [AuthGaurd, UserRoleGuard],
+    data: {
+      userRole: ['admin'],
+    },
+  },
+  {
+    path: 'auth',
+    component: AuthComponent,
   },
 
   {

@@ -18,7 +18,7 @@
 
       <mat-form-field appearance="fill">
         <mat-label>Select me</mat-label>
-        <mat-select #userType>
+        <mat-select #userType [value]="userObj ? userObj.userType : ''">
           <mat-option [value]="type.Admin">{{ type.Admin }}</mat-option>
           <mat-option [value]="type.User">{{ type.User }}</mat-option>
         </mat-select>

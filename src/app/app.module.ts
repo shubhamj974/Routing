@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { FormsModule } from '@angular/forms';
+import { FormControl, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { AppRoutingModule } from './app-routing.module';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MaterialModule } from './material/material.module';
@@ -17,6 +17,9 @@ import { ProductFormComponent } from './shared/components/products/product-form/
 import { DialogBoxComponent } from './shared/components/dialog-box/dialog-box.component';
 import { DialogLogoutComponent } from './shared/components/dialog-logout/dialog-logout.component';
 import { NavBarToggleDirective } from './shared/directive/nav-bar-toggle.directive';
+import { AuthComponent } from './shared/components/auth/auth.component';
+import { AdminComponent } from './shared/components/admin/admin.component';
+import { NoPastePasswordDirective } from './shared/directive/no-paste-password.directive';
 
 @NgModule({
   declarations: [
@@ -32,6 +35,9 @@ import { NavBarToggleDirective } from './shared/directive/nav-bar-toggle.directi
     DialogBoxComponent,
     DialogLogoutComponent,
     NavBarToggleDirective,
+    AuthComponent,
+    AdminComponent,
+    NoPastePasswordDirective,
   ],
   imports: [
     BrowserModule,
@@ -39,6 +45,7 @@ import { NavBarToggleDirective } from './shared/directive/nav-bar-toggle.directi
     FormsModule,
     BrowserAnimationsModule,
     MaterialModule,
+    ReactiveFormsModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
